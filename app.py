@@ -57,6 +57,7 @@ def login():
 @jwt_required()
 def protected():
     current_user = get_jwt_identity()
+    a=1
     return jsonify(logged_in_as=current_user), 200
 
 
