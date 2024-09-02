@@ -8,7 +8,7 @@ db_config = {
     'user': 'root',
     'password': 'mysql',
     'host': 'localhost',
-    'database': '',
+    'database': 'hcet_libary',
 }
 
 JWT_SECRET_KEY="HCET-BATCH-CSE-2024"
