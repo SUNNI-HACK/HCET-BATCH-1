@@ -105,7 +105,57 @@ def branch():
         except:
             return jsonify({"status_code":404,"message":"exegution error"})
         
-@app.route("/branch/<string:name >",methods=["POST","GET","DELECT"])
+@app.route('/branch/<string:name>',methods=["POST","GET","DELECT"])
+def branch():
+    if request.method == "POST":
+        try:
+            connection = get_db_connection()
+            request.args.get("name")
+            data = request.json
+            cursor = connection.cursor()
+            query = "update branch set name = %s where id = %s;"
+            cursor.execute(query,[data['name']])
+            connection.commit()
+            return jsonify({"status_code":200,"message":"updated successfully"})
+        except:
+            return jsonify({"status_code":404,"message":"exegution error"})
+        
+    elif request.method == "GET":
+        try :
+            connection = get_db_connection()
+            cursor = connection.cursor(dictionary=True)
+            show_users = "select * from branch ;"
+            cursor.execute(show_users)
+            result = cursor.fetchall()
+            cursor.close()
+            connection.close()
+            return jsonify({"status_code":200,"data":result})
+        except:
+            return jsonify({"status_code":404,"message":"exegution error"})
+        
+    elif request.method == "DELECT":
+        try :
+            connection =get_db_connection()
+            cursor = connection.cursor(dictionary=True)
+            delect = "delect from branch where name = %s;"
+            cursor.execute(delect,data['name'])
+            cursor.close() 
+            connection.commit()
+            return jsonify({"status_code":200,"message":"delected sucessfully"})
+        except :
+            return jsonify({"status_code":404,"message":"exegution error"}) 
+        
+        
+        
+          
+
+
+    
+            
+
+
+
+
 
         
 
